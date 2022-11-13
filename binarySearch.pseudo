@@ -1,0 +1,24 @@
+class busquedas
+begin
+    List^ Lista= new List();
+    int first=0;
+    int middle;
+    int last = arraySize - 1;
+
+    while (first<=last)
+    begin
+    middle =(first + last) / 2;
+
+        if (searched ==Lista->GetElementID(middle)) then
+            return Lista->GetElementID(middle);
+        else
+            if (Lista->GetElementID(middle)>searched) then
+            begin
+                last = middle - 1;
+            else
+                first = middle + 1;
+            end
+        end
+    end
+
+end

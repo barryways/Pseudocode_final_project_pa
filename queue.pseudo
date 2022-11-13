@@ -1,0 +1,54 @@
+class Lista
+begin
+	struct Node
+	begin
+		string arma;// para saber el personaje
+        double precio; //precio del arma
+        int ID;//para identificar el tipo de personaje
+		Node* next;
+	end
+private:
+	Nodo* tail;
+	Nodo* head;
+	int count;
+
+public:
+	procedure Queue(string arma, double precio, int ID) begin
+	    Nodo* nodoActual = new Nodo();
+	    nodoActual->arma = arma;
+	    nodoActual->precio = precio;
+	    nodoActual->ID = ID;
+
+	    if (count == 0)then
+	    begin
+	    	this->head = nodoActual;
+	    	this->tail = nodoActual;
+
+	    else 
+	    	this->tail->next = nodoActual;
+	    	this->tail = this->tail->next; 
+
+	    end
+	    count++;
+    end
+
+    procedure Dequeue() begin
+	    Nodo* nodoActual = new Nodo();
+
+	    if (count == 0) then
+	    begin
+	    	return;
+	
+	    else if (count == 1) then
+	    	this->tail = nullptr;
+	    	this->head = nullptr;
+    
+	    else 
+	    	this->head = this->head->next;
+
+	    end
+	    count--;
+    end
+
+
+end

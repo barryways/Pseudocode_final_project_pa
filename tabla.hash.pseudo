@@ -1,0 +1,40 @@
+class Hash
+
+private:
+	function int hash_function(int number, int array_size) begin
+		number = number * 13;
+		number = number + 152;
+		number = number - 7;
+		number = number * 2;
+		number = number + 362;
+		number = number + 362;
+		number = number % array_size;
+		return number;
+	end
+
+public:
+
+
+	function int colission_prevent(int array_numbers[], int original_position,int array_size) 
+    begin
+		int temporal_position = original_position;
+		while (array_numbers[temporal_position] != NULL)
+		begin
+			temporal_position = temporal_position + 1;
+			if (temporal_position>(array_size-1)) then
+				temporal_position = 0;
+			end
+		end
+		return temporal_position;
+	end
+
+	function bool is_empty(int array_numbers[], int position) {
+		if (array_numbers[position]== NULL)
+		{
+			return true;
+		}
+		return false;
+	}
+
+
+end

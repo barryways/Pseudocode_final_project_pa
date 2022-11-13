@@ -1,0 +1,39 @@
+class Sort
+begin
+private:
+    procedure swap(int* itemA, int* itemB)
+    begin
+       int temporal = *itemA;
+        *itemA = *itemB;
+        *itemB = temporal;
+    end
+
+    function int partition(Lista^ List, int low, int high)
+    begin
+        int pivot = List->GetElementID(high);
+        int i= (low- 1); 
+    
+        for (int j = low; j <= high - 1; j++) begin
+        
+            if (List->GetElementID(j) < pivot) begin
+                i++; 
+                swap(&List->GetElementID(i), &List->GetElementID(j));
+            end
+        end
+        swap(&List->GetElementID(i+1), &List->GetElementID(high));
+        return (i + 1);
+    end
+public:
+    Lista^ List = new Lista();
+
+    procedure quickSort(Lista^ List, int low, int high)
+    begin
+        if (low < high) then
+        begin
+            int pivote = partition(List, low, high);
+            quickSort(List, low, pivote - 1);
+            quickSort(List, pivote + 1, high);
+        end
+    end
+
+end

@@ -1,0 +1,135 @@
+class Lista
+begin
+	struct Node
+	begin
+		string personaje;// para saber el personaje
+        int ID;//para identificar el tipo de personaje
+		Node* next;
+	end
+
+private:
+	Node* head = nullptr;
+
+public:
+	procedure Add(string personaje, int ID) begin
+		Node* nuevoNodo = new Node();
+		nuevoNodo->personaje = personaje;
+		nuevoNodo->ID = ID;
+		if (head == nullptr) then
+			head = nuevoNodo;
+		
+		else 
+			Node* nodoActual = head;
+			while (nodoActual->next != nullptr)
+			begin
+				nodoActual = nodoActual->next;
+			end
+			nodoActual->next = nuevoNodo;
+		end
+	end
+
+	function int Count() begin
+		int cantidadNodos = 0;
+		for (Node* i = head; i != nullptr; i = i->next) begin
+			cantidadNodos++;
+		end
+		return cantidadNodos;
+	end
+
+	function bool Contains(int item) begin
+		Node* nodoActual = head;
+		while (nodoActual != nullptr && nodoActual->data != item)
+		begin
+			nodoActual = nodoActual->next;
+		end
+		if (nodoActual != nullptr) then
+		begin
+			if (nodoActual->data == item)
+			begin
+				return true;
+			
+			else 
+				return false;
+			end
+		
+		else 
+			return false;
+		end
+	end
+
+	function int IndexOf(int item) begin
+		Node* nodoActual = head;
+		int posicion = 0;
+		while (nodoActual != nullptr && nodoActual->data != item)
+		begin
+			nodoActual = nodoActual->next;
+			posicion++;
+		end
+		if (nodoActual == nullptr) then
+			posicion = -1;
+		end
+		return posicion;
+	end
+
+	function int LastIndexOf(int ID) begin
+		Node* nodoActual = head;
+		int posicion = 0, index = 0;
+		while (nodoActual != nullptr)
+		begin
+			if (nodoActual->data == ID) begin
+				index = posicion;
+			end
+			nodoActual = nodoActual->next;
+			posicion++;
+
+		end
+		return index;
+	end
+
+	procedure RemoveAt(int index) begin
+		Node* nodoActual = head;
+		if (Count() != 0) then
+        begin
+			if (Count() == 1 || index == 0)
+			begin
+				head = head->next;
+
+			else if (index >= Count()) then
+				Node* anterior = head;
+				nodoActual = anterior->next;
+				while (nodoActual != nullptr)
+				begin
+					anterior = nodoActual;
+					nodoActual = nodoActual->next;
+				end
+				anterior->next = nodoActual->next;
+			
+			else 
+				Node* nodoAnterior = head;
+				nodoActual = nodoAnterior->next;
+				int posicion = 1;
+				while (nodoActual != nullptr && posicion < index)
+				begin
+					nodoAnterior = nodoActual;
+					nodoActual = nodoActual->next;
+					posicion++;
+				end
+				nodoAnterior->next = nodoActual->next;
+			end
+		end
+	end
+
+    function string GetElementID(int index) begin
+        	if (index >= 0 && index < Count()) then
+			Node* nodoActual = head;
+			int posicion = 0;
+			while (posicion < index)
+			begin
+				nodoActual = nodoActual->next;
+				posicion++;
+			end
+			return nodoActual->ID;
+		end
+    end
+
+end
